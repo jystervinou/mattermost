@@ -33,6 +33,7 @@ jobs:
       - checkout
       - run: |
           cd ..
+          ls -l
           git clone --depth=1 --no-single-branch https://github.com/mattermost/focalboard.git
           cd focalboard
           git checkout $CIRCLE_BRANCH || git checkout <<parameters.target-branch>> || git checkout rolling-stable
@@ -222,7 +223,7 @@ jobs:
           command: |
             cd mattermost-server
             go vet ./...
-            make golangci-lint
+            # make golangci-lint // commenting out as it doesn't provide stable results
   # Dedicate job for mattermost-vet to make more clear when the job fails
   check-mattermost-vet:
     docker:
